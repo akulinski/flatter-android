@@ -2,7 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+=======
+<<<<<<< HEAD
+<<<<<<< master
+=======
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+>>>>>>> Login screen implemented
+=======
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+>>>>>>> develop
+>>>>>>> develop
       <module fileurl="file://$PROJECT_DIR$/flatter-android.iml" filepath="$PROJECT_DIR$/flatter-android.iml" />
     </modules>
   </component>
