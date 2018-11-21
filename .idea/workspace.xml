@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
 <<<<<<< master
 =======
+=======
+>>>>>>> develop
   <component name="AndroidLayouts">
     <shared>
       <config />
@@ -10,13 +13,17 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
 <<<<<<< master
     <list default="true" id="8cface1e-fc6d-4c23-a520-e908dc7d9619" name="Default" comment="">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
@@ -78,6 +85,8 @@
       <change beforePath="$PROJECT_DIR$/flatter-android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flatter-android.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
 =======
+=======
+>>>>>>> develop
     <list default="true" id="2b0e2365-7963-450e-ae76-cf6b62b3664e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/kpg/flatter/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/kpg/flatter/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/login_bottombar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/login_bottombar.xml" afterDir="false" />
@@ -85,7 +94,10 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/login_topbar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/login_topbar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/login_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/login_view.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -94,14 +106,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
 <<<<<<< master
 =======
+=======
+>>>>>>> develop
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -110,6 +128,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
 <<<<<<< master
     <leaf>
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
@@ -118,6 +137,8 @@
             <state relative-caret-position="1122">
               <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
 =======
+=======
+>>>>>>> develop
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="login_center.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/login_center.xml">
@@ -211,15 +232,21 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+<<<<<<< HEAD
 <<<<<<< master
 =======
+=======
+>>>>>>> develop
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -228,13 +255,19 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
+<<<<<<< HEAD
 <<<<<<< master
 =======
+=======
+>>>>>>> develop
     <option name="myGradleHomes">
       <map>
         <entry key="$PROJECT_DIR$" value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6" />
@@ -2484,7 +2517,10 @@
         </entry>
       </map>
     </option>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
     <option name="projectSyncType">
       <map>
         <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
@@ -2494,9 +2530,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
 <<<<<<< master
         <option value="$PROJECT_DIR$/.gitignore" />
 =======
+=======
+>>>>>>> develop
         <option value="$PROJECT_DIR$/app/src/main/java/com/kpg/flatter/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
@@ -2510,18 +2549,24 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login_center.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login_topbar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/login_view.xml" />
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
+<<<<<<< HEAD
 <<<<<<< master
     <option name="y" value="20" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
 =======
+=======
+>>>>>>> develop
     <option name="y" value="55" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
@@ -2529,12 +2574,16 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
 <<<<<<< master
       <pane id="ProjectPane" />
       <pane id="Scope" />
@@ -2561,6 +2610,8 @@
               <item name="flatter-android" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
 =======
+=======
+>>>>>>> develop
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -2584,11 +2635,15 @@
               <item name="flatter-android" type="b2602c69:ProjectViewProjectNode" />
               <item name="flatter-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
+<<<<<<< HEAD
 <<<<<<< master
               <item name="flatter-android" type="1abcf292:AndroidViewProjectNode" />
               <item name="flatter-android" type="462c0819:PsiDirectoryNode" />
@@ -2633,6 +2688,16 @@
               <item name="kpg" type="462c0819:PsiDirectoryNode" />
               <item name="flatter" type="462c0819:PsiDirectoryNode" />
 =======
+=======
+              <item name="flatter-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flatter-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+>>>>>>> develop
               <item name="flatter-android" type="b2602c69:ProjectViewProjectNode" />
               <item name="flatter-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
@@ -2697,12 +2762,16 @@
             <path>
               <item name="flatter-android" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
 <<<<<<< master
       <pane id="PackagesPane" />
     </panes>
@@ -2713,6 +2782,8 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
 =======
+=======
+>>>>>>> develop
       <pane id="Scope" />
     </panes>
   </component>
@@ -2721,7 +2792,10 @@
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="device.picker.selection" value="Nexus_5X_API_28_x86" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2745,18 +2819,25 @@
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
+<<<<<<< HEAD
 <<<<<<< master
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
 =======
       <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
 >>>>>>> Login screen implemented
+=======
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+>>>>>>> develop
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <patterns />
+<<<<<<< HEAD
 <<<<<<< master
 =======
+=======
+>>>>>>> develop
       <method>
         <option name="Make" enabled="false" />
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
@@ -2810,7 +2891,10 @@
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -2847,6 +2931,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
 <<<<<<< master
       <changelist id="8cface1e-fc6d-4c23-a520-e908dc7d9619" name="Default" comment="" />
       <created>1542818352155</created>
@@ -2887,6 +2972,8 @@
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
 =======
+=======
+>>>>>>> develop
       <changelist id="2b0e2365-7963-450e-ae76-cf6b62b3664e" name="Default" comment="" />
       <created>1542320434766</created>
       <option name="number" value="Default" />
@@ -2995,11 +3082,15 @@
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+<<<<<<< HEAD
 <<<<<<< master
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -3026,6 +3117,8 @@
       </state>
     </states>
 =======
+=======
+>>>>>>> develop
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented top and bottom bar of login screen and set the app theme" />
     <MESSAGE value="Login screen xmls implemented" />
@@ -3456,6 +3549,9 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 >>>>>>> Login screen implemented
+=======
+>>>>>>> develop
   </component>
 </project>
