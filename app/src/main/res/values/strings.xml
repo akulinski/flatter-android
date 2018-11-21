@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">flatter</string>
+    <string name="app_name">Flatter</string>
+    <string name="name">Flatter</string>
+    <string name="signup_loginscreen">Don\'t have an account? Sign up</string>
 </resources>
