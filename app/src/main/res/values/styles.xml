@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:navigationBarColor">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/product</item>
     </style>
 
 
