@@ -1,10 +1,15 @@
 package com.kpg.flatter.requests.callbacks;
 
+import android.util.Log;
+
+import com.google.common.eventbus.EventBus;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.kpg.flatter.eventbus.EventBusSingleton;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.utills.Status;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,6 +20,13 @@ import retrofit2.Response;
  * Retrofit handling of sever callbacks
  */
 public class SigninCallback implements Callback<JsonObject> {
+
+   private EventBus eventBus;
+
+   @Inject
+    public SigninCallback(EventBus eventBus){
+        this.eventBus = eventBus;
+    }
 
     /**
      * Method that handle successful response form the server
@@ -30,8 +42,12 @@ public class SigninCallback implements Callback<JsonObject> {
         JsonElement token = jsonResponse.get("token");
 
         if (status.getAsString().equals("ACCEPTED")){
-            EventBusSingleton.getInstance().getEventBus().post(new SigninEvent(Status.SUCCES.str));
-        } else EventBusSingleton.getInstance().getEventBus().post(new SigninEvent(Status.FALIURE.str));
+            eventBus.post(new SigninEvent(Status.SUCCES.str));
+            Log.e("ACCEPTED","YES");
+        } else {
+            Log.e("ACCEPTED","NO");
+            eventBus.post(new SigninEvent(Status.FALIURE.str));
+        }
 
     }
 
@@ -44,8 +60,9 @@ public class SigninCallback implements Callback<JsonObject> {
     @Override
     public void onFailure(Call<JsonObject> call, Throwable t) {
 
-        t.printStackTrace();
-        EventBusSingleton.getInstance().getEventBus().post(new SigninEvent(Status.FALIURE.str));
+        Log.d("ACCEPTED",t.getLocalizedMessage());
+        Log.d("URL",call.request().url().toString());
+        eventBus.post(new SigninEvent(Status.FALIURE.str));
 
     }
 

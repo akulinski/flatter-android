@@ -1,22 +1,31 @@
 package com.kpg.flatter.requests;
 
-import com.kpg.flatter.utills.Urls;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static Retrofit retrofit = null;
+
+    private Retrofit retrofit = null;
+
+    private String baseUrl;
+
+    @Inject
+    public ApiClient(@Named("baseUrl") String baseUrl){
+        this.baseUrl = baseUrl;
+    }
 
     /**
      * Retrofit singleton
      * @return get Retrofit client that handles all server requests
      */
-    public static Retrofit getClient() {
+    public Retrofit getClient() {
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Urls.SERVER.url)
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

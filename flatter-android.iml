@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< master
-<module external.system.id="GRADLE" type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="android-gradle" name="Android-Gradle">
-      <configuration>
-        <option name="GRADLE_PROJECT_PATH" value=":" />
-      </configuration>
-    </facet>
-  </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
-    <content url="file://$MODULE_DIR$" />
-=======
-=======
->>>>>>> develop
->>>>>>> develop
 <module external.linked.project.id="flatter-android" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="java-gradle" name="Java-Gradle">
@@ -32,15 +13,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
     </content>
-<<<<<<< HEAD
     <orderEntry type="inheritedJdk" />
-=======
-<<<<<<< HEAD
->>>>>>> Login screen implemented
-=======
->>>>>>> develop
-    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
->>>>>>> develop
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

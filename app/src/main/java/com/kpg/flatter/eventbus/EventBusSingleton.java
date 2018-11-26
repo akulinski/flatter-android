@@ -7,9 +7,7 @@ public class EventBusSingleton {
     private static EventBusSingleton instancce;
 
     private EventBusSingleton(){
-
         this.eventBus = new EventBus();
-
     }
 
     /**
