@@ -5,7 +5,6 @@ import android.util.Log;
 import com.google.common.eventbus.EventBus;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.kpg.flatter.eventbus.EventBusSingleton;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.utills.Status;
 

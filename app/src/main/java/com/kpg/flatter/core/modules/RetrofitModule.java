@@ -3,6 +3,7 @@ package com.kpg.flatter.core.modules;
 import com.google.common.eventbus.EventBus;
 import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
+import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
 import com.kpg.flatter.utills.Urls;
 
@@ -51,5 +52,11 @@ public final class RetrofitModule {
     @Singleton
     public SigninCallback provideSigninCallback(EventBus eventBus){
         return new SigninCallback(eventBus);
+    }
+
+    @Provides
+    @Singleton
+    public AddPhotoCallback provideAddPhotoCallback(EventBus eventBus){
+        return new AddPhotoCallback(eventBus);
     }
 }

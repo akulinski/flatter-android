@@ -1,5 +1,6 @@
 package com.kpg.flatter;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -14,7 +15,10 @@ import com.google.common.eventbus.Subscribe;
 import com.google.gson.JsonObject;
 import com.kpg.flatter.core.application.FlatterCore;
 import com.kpg.flatter.eventbus.events.SigninEvent;
+import com.kpg.flatter.parsers.photoparser.PhotoModel;
+import com.kpg.flatter.parsers.photoparser.PhotoToJsonParser;
 import com.kpg.flatter.requests.ApiInterface;
+import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
 import com.kpg.flatter.utills.Status;
 
@@ -43,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
      * Creates view form xml, connects to server, bind ButterKnife
      * and subscribe to EventBus
      */
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         subscribeToEventBus();
-
     }
 
     /**
