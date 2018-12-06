@@ -2,8 +2,11 @@ package com.kpg.flatter.core.application;
 
 import android.app.Application;
 
+import com.kpg.flatter.activities.SignupActivity;
 import com.kpg.flatter.core.components.DaggerLoginActivityComponent;
+import com.kpg.flatter.core.components.DaggerSignupActivityComponent;
 import com.kpg.flatter.core.components.LoginActivityComponent;
+import com.kpg.flatter.core.components.SignupActivityComponent;
 import com.kpg.flatter.core.modules.EventBusModule;
 import com.kpg.flatter.core.modules.RetrofitModule;
 
@@ -16,6 +19,7 @@ public class FlatterCore extends Application {
      * Built by dagger
      */
     private LoginActivityComponent loginActivityComponent;
+    private SignupActivityComponent signupActivityComponent;
 
     /**
      * Called when application starts - dagger builder call
@@ -23,7 +27,18 @@ public class FlatterCore extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        loginActivityComponent = DaggerLoginActivityComponent.builder().eventBusModule(new EventBusModule()).retrofitModule(new RetrofitModule()).build();
+        loginActivityComponent = DaggerLoginActivityComponent
+                .builder()
+                .eventBusModule(new EventBusModule())
+                .retrofitModule(new RetrofitModule())
+                .build();
+
+        signupActivityComponent = DaggerSignupActivityComponent
+                .builder()
+                .eventBusModule(new EventBusModule())
+                .retrofitModule(new RetrofitModule())
+                .build();
+
     }
 
     public LoginActivityComponent getLoginActivityComponent() {
@@ -32,5 +47,13 @@ public class FlatterCore extends Application {
 
     public void setLoginActivityComponent(LoginActivityComponent loginActivityComponent) {
         this.loginActivityComponent = loginActivityComponent;
+    }
+
+    public SignupActivityComponent getSignupActivityComponent(){
+        return signupActivityComponent;
+    }
+
+    public void setSignupActivityComponent(SignupActivityComponent signupActivityComponent){
+        this.signupActivityComponent = signupActivityComponent;
     }
 }

@@ -6,8 +6,11 @@ package com.kpg.flatter.utills;
  */
 public enum Status {
 
-    SUCCES("SUCCES"),
-    FALIURE("FAILURE");
+    SUCCES("SUCCESS"),
+    FALIURE("FAILURE"),
+    LOGINEXISTS("LOGINEXISTS"),
+    EMAILEXISTS("EMAILEXISTS");
+
 
     public String str;
 

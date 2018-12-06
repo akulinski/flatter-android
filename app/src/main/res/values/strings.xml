@@ -2,4 +2,14 @@
     <string name="app_name">Flatter</string>
     <string name="name">Flatter</string>
     <string name="signup_loginscreen">Don\'t have an account? Sign up</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="person_name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_again">Password again</string>
+    <string name="emailsent">Verification email sent.</string>
+    <string name="confirmemail">Check your inbox to confirm.</string>
+    <string name="ok">OK</string>
 </resources>

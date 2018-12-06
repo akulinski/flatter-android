@@ -24,4 +24,7 @@ public interface ApiInterface {
     @POST("/users/addPhoto")
     Call<JsonObject> addPhoto(@Body String body);
 
+    @POST("/users/signup")
+    Call<JsonObject> signup(@Body HashMap<String, String> body);
+
 }

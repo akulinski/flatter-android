@@ -6,10 +6,10 @@
     <RelativeLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="50dp"
         android:id="@+id/relLey1"
         android:layout_alignParentTop="true">
-        <include layout="@layout/login_topbar"/>
+        <include layout="@layout/toptext"/>
     </RelativeLayout>
 
     <RelativeLayout

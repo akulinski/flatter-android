@@ -1,11 +1,15 @@
 package com.kpg.flatter;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.JsonObject;
+import com.kpg.flatter.activities.SignupActivity;
 import com.kpg.flatter.core.application.FlatterCore;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.parsers.photoparser.PhotoModel;
@@ -37,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password_textedit) EditText passwordField;
     @BindView(R.id.signup_textview) TextView signupText;
     @BindView(R.id.signin_button) Button signinButton;
+    @BindView(R.id.textTop) TextView topText;
 
 
     @Inject EventBus eventBus;
@@ -58,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         setContentView(R.layout.login_view);
-
         ButterKnife.bind(this);
+        topText.setText("Flatter");
         subscribeToEventBus();
     }
 
@@ -75,6 +81,14 @@ public class LoginActivity extends AppCompatActivity {
         loginField.getText().clear();
         passwordField.getText().clear();
 
+    }
+
+    /**
+     * On click action for sign up text
+     */
+    @OnClick(R.id.signup_textview) void signUp(){
+        Intent signupIntent = new Intent(this, SignupActivity.class);
+        startActivity(signupIntent);
     }
 
     /**

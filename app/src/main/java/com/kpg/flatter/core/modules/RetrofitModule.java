@@ -5,6 +5,7 @@ import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
+import com.kpg.flatter.requests.callbacks.SignupCallback;
 import com.kpg.flatter.utills.Urls;
 
 import javax.inject.Named;
@@ -56,7 +57,22 @@ public final class RetrofitModule {
 
     @Provides
     @Singleton
-    public AddPhotoCallback provideAddPhotoCallback(EventBus eventBus){
+    public AddPhotoCallback provideAddPhotoCallback(EventBus eventBus) {
+
         return new AddPhotoCallback(eventBus);
+
+    }
+
+    /**
+     *
+     * @param eventBus provided by event bus module
+     * @return callback for sign up screen
+     */
+    @Provides
+    @Singleton
+    public SignupCallback provideSignupCallback(EventBus eventBus){
+
+        return new SignupCallback(eventBus);
+
     }
 }

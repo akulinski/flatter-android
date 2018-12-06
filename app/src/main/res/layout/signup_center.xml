@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:divider="@drawable/horizontal_divider"
+    android:showDividers="middle"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/lineTop"
+        android:layout_margin="20dp"
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+
+    <EditText
+        android:id="@+id/nameField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/person_name"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/textedit_shape"/>
+
+    <EditText
+        android:id="@+id/surnameField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/surname"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/textedit_shape"/>
+
+    <EditText
+        android:id="@+id/loginField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/login"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/textedit_shape"/>
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/textedit_shape" />
+
+    <EditText
+        android:id="@+id/passwordAgainField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/password_again"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/textedit_shape"/>
+
+    <EditText
+        android:id="@+id/emailField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@drawable/textedit_shape"/>
+
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_margin="20dp"
+        android:layout_width="150dp"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+</LinearLayout>
