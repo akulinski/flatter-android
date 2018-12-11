@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.JsonObject;
+import com.kpg.flatter.activities.ConfigureProfileActivity;
 import com.kpg.flatter.activities.SignupActivity;
 import com.kpg.flatter.core.application.FlatterCore;
 import com.kpg.flatter.eventbus.events.SigninEvent;
@@ -25,6 +26,7 @@ import com.kpg.flatter.parsers.photoparser.PhotoToJsonParser;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
+import com.kpg.flatter.utills.StaticData;
 import com.kpg.flatter.utills.Status;
 
 import java.util.HashMap;
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.login_view);
         ButterKnife.bind(this);
-        topText.setText("Flatter");
+        topText.setText(R.string.app_name);
         subscribeToEventBus();
     }
 
@@ -75,11 +77,19 @@ public class LoginActivity extends AppCompatActivity {
      */
     @OnClick(R.id.signin_button) void signIn(){
 
-        Call<JsonObject> call = apiService.signin(createSigninRequestBody());
-        call.enqueue(signinCallback);
+        if(loginField.getText().toString().equals("")
+                || passwordField.getText().toString().equals("")){
 
-        loginField.getText().clear();
-        passwordField.getText().clear();
+            showDialog("Fill all fields");
+
+        } else {
+
+            Call<JsonObject> call = apiService.signin(createSigninRequestBody());
+            call.enqueue(signinCallback);
+            StaticData.username = loginField.getText().toString();
+            loginField.getText().clear();
+            passwordField.getText().clear();
+        }
 
     }
 
@@ -107,8 +117,12 @@ public class LoginActivity extends AppCompatActivity {
         public void getStatus(SigninEvent event) {
 
             if(event.getStatus().equals(Status.SUCCES.str)){
-                showDialog("Signed in");
-            } else showDialog("Not signed in");
+
+                Intent configureProfileIntent = new Intent(getApplicationContext(),
+                        ConfigureProfileActivity.class);
+                finish();
+                startActivity(configureProfileIntent);
+            } else showDialog("Login or password is incorrect");
 
         }
 

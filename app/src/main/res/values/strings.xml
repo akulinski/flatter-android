@@ -12,4 +12,9 @@
     <string name="emailsent">Verification email sent.</string>
     <string name="confirmemail">Check your inbox to confirm.</string>
     <string name="ok">OK</string>
+    <string name="FillFields">Fill all fields</string>
+    <string name="LoginPasswordIncorect">Login or password not corrected</string>
+    <string name="choosePhoto">Choose your profile photo</string>
+    <string name="choosetype">Choose what you are looking for</string>
+    <string name="configured">You are all set up!</string>
 </resources>

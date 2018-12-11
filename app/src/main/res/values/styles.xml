@@ -5,12 +5,18 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:navigationBarColor">@color/colorAccent</item>
         <item name="android:fontFamily">@font/product</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AllWhite" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:fontFamily">@font/product</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 

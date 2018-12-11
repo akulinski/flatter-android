@@ -27,6 +27,21 @@
 
         </activity>
 
+        <activity
+            android:name=".activities.ConfigureProfileActivity"
+            android:theme="@style/AllWhite">
+
+        </activity>
+
+        <activity android:name=".activities.MainView"
+            android:theme="@style/AllWhite">
+        </activity>
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="d75c07873cc7ef98414b4efac4081f6f56617712"/>
+
     </application>
 
 </manifest>

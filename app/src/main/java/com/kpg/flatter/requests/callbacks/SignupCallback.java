@@ -50,6 +50,9 @@ public class SignupCallback implements Callback<JsonObject> {
         } else if (status.getAsString().equals(Status.EMAILEXISTS.str)){
             eventBus.post(new SignupEvent(Status.EMAILEXISTS.str));
             Log.d("STATUS","Email exists");
+        } else {
+            eventBus.post(new SignupEvent(Status.FALIURE.str));
+            Log.d("STATUS","Failure");
         }
 
     }
