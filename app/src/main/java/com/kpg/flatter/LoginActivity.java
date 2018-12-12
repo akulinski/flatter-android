@@ -1,15 +1,12 @@
 package com.kpg.flatter;
 
 import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Explode;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,12 +18,8 @@ import com.kpg.flatter.activities.ConfigureProfileActivity;
 import com.kpg.flatter.activities.SignupActivity;
 import com.kpg.flatter.core.application.FlatterCore;
 import com.kpg.flatter.eventbus.events.SigninEvent;
-import com.kpg.flatter.parsers.photoparser.PhotoModel;
-import com.kpg.flatter.parsers.photoparser.PhotoToJsonParser;
 import com.kpg.flatter.requests.ApiInterface;
-import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
-import com.kpg.flatter.utills.StaticData;
 import com.kpg.flatter.utills.Status;
 
 import java.util.HashMap;
@@ -86,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
 
             Call<JsonObject> call = apiService.signin(createSigninRequestBody());
             call.enqueue(signinCallback);
-            StaticData.username = loginField.getText().toString();
             loginField.getText().clear();
             passwordField.getText().clear();
         }
