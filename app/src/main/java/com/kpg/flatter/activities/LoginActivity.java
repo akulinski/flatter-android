@@ -1,4 +1,4 @@
-package com.kpg.flatter;
+package com.kpg.flatter.activities;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -14,8 +14,7 @@ import android.widget.TextView;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.JsonObject;
-import com.kpg.flatter.activities.ConfigureProfileActivity;
-import com.kpg.flatter.activities.SignupActivity;
+import com.kpg.flatter.R;
 import com.kpg.flatter.core.application.FlatterCore;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.requests.ApiInterface;
@@ -58,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        setContentView(R.layout.login_view);
+        setContentView(R.layout.signin);
         ButterKnife.bind(this);
         topText.setText(R.string.app_name);
         subscribeToEventBus();
@@ -70,8 +69,21 @@ public class LoginActivity extends AppCompatActivity {
      */
     @OnClick(R.id.signin_button) void signIn(){
 
-        if(loginField.getText().toString().equals("")
-                || passwordField.getText().toString().equals("")){
+        // !!
+        // !!
+        // TEST INTENT
+        // TO BO DELETED
+        // !!
+        // !!
+        if(loginField.getText().toString().equals("test")){
+            Intent mainViewIntent = new Intent(getApplicationContext(),MainActivity.class);
+            finish();
+            startActivity(mainViewIntent);
+            return;
+        }
+
+        if (loginField.getText().toString().equals("")
+                || passwordField.getText().toString().equals("")) {
 
             showDialog("Fill all fields");
 
@@ -86,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * On click action for sign up text
+     * On click action for sign up general_toptext
      */
     @OnClick(R.id.signup_textview) void signUp(){
         Intent signupIntent = new Intent(this, SignupActivity.class);
@@ -110,10 +122,11 @@ public class LoginActivity extends AppCompatActivity {
 
             if(event.getStatus().equals(Status.SUCCES.str)){
 
-                Intent configureProfileIntent = new Intent(getApplicationContext(),
-                        ConfigureProfileActivity.class);
+                //Intent configureProfileIntent = new Intent(getApplicationContext(),
+                //        ConfigureProfileActivity.class);
+                Intent mainViewIntent = new Intent(getApplicationContext(),MainActivity.class);
                 finish();
-                startActivity(configureProfileIntent);
+                startActivity(mainViewIntent);
             } else showDialog("Login or password is incorrect");
 
         }

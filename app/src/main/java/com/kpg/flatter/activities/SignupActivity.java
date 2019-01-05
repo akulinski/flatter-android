@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
         ((FlatterCore)getApplication()).getSignupActivityComponent().inject(this);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup_view);
+        setContentView(R.layout.signup);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR |
                 View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 

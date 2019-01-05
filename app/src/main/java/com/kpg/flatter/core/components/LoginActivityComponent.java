@@ -1,6 +1,6 @@
 package com.kpg.flatter.core.components;
 
-import com.kpg.flatter.LoginActivity;
+import com.kpg.flatter.activities.LoginActivity;
 import com.kpg.flatter.core.modules.EventBusModule;
 import com.kpg.flatter.core.modules.RetrofitModule;
 

@@ -17,4 +17,5 @@
     <string name="choosePhoto">Choose your profile photo</string>
     <string name="choosetype">Choose what you are looking for</string>
     <string name="configured">You are all set up!</string>
+    <string name="fakeFlat">https://i.pinimg.com/originals/e9/32/ce/e932ce2b1461c5c4a67ea1e82736f174.jpg</string>
 </resources>

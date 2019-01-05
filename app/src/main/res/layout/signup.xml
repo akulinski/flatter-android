@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true">
-        <include layout="@layout/toptext"/>
+        <include layout="@layout/general_toptext_withphoto"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-        <include layout="@layout/bottombutton"/>
+        <include layout="@layout/general_bottombutton"/>
     </RelativeLayout>
 
 </RelativeLayout>
