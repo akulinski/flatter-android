@@ -7,6 +7,7 @@ import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -15,8 +16,8 @@ import retrofit2.http.Path;
  */
 public interface ApiInterface {
 
-    @POST("/users/signin")
-    Call<JsonObject> signin(@Body HashMap<String, String> body);
+    @GET("/user/validate")
+    Call<JsonObject> signin(@Header("Authorization") String credentials);
 
     @GET("/users/getPhotos/{user}/{album}")
     Call<JsonObject> getPhotos(@Path("user")String user,@Path("album") String album);

@@ -18,4 +18,7 @@
     <string name="choosetype">Choose what you are looking for</string>
     <string name="configured">You are all set up!</string>
     <string name="fakeFlat">https://i.pinimg.com/originals/e9/32/ce/e932ce2b1461c5c4a67ea1e82736f174.jpg</string>
+    <string name="preference_file_key">iPV4z2jZcjDeP5PEmSri</string>
+    <string name="CREDENTIALS">CREDENTIALS</string>
+    <string name="credentials">credentials</string>
 </resources>

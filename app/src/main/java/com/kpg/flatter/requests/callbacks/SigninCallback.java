@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.common.eventbus.EventBus;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.utills.Status;
 
@@ -21,10 +22,12 @@ import retrofit2.Response;
 public class SigninCallback implements Callback<JsonObject> {
 
    private EventBus eventBus;
+   private SharedPreferencesWraper sharedPreferencesWraper;
 
    @Inject
-    public SigninCallback(EventBus eventBus){
+    public SigninCallback(EventBus eventBus,SharedPreferencesWraper sharedPreferencesWraper){
         this.eventBus = eventBus;
+        this.sharedPreferencesWraper = sharedPreferencesWraper;
     }
 
     /**
@@ -38,16 +41,12 @@ public class SigninCallback implements Callback<JsonObject> {
 
         JsonObject jsonResponse = response.body();
         JsonElement status = jsonResponse.get("status");
-        JsonElement token = jsonResponse.get("token");
 
         if (status.getAsString().equals("ACCEPTED")){
             eventBus.post(new SigninEvent(Status.SUCCES.str));
-            Log.e("ACCEPTED","YES");
         } else {
-            Log.e("ACCEPTED","NO");
             eventBus.post(new SigninEvent(Status.FALIURE.str));
         }
-
     }
 
     /**
@@ -59,8 +58,6 @@ public class SigninCallback implements Callback<JsonObject> {
     @Override
     public void onFailure(Call<JsonObject> call, Throwable t) {
 
-        Log.d("ACCEPTED",t.getLocalizedMessage());
-        Log.d("URL",call.request().url().toString());
         eventBus.post(new SigninEvent(Status.FALIURE.str));
 
     }

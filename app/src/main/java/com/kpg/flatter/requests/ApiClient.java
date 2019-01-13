@@ -13,12 +13,13 @@ public class ApiClient {
     private String baseUrl;
 
     @Inject
-    public ApiClient(@Named("baseUrl") String baseUrl){
+    public ApiClient(@Named("baseUrl") String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
     /**
      * Retrofit singleton
+     *
      * @return get Retrofit client that handles all server requests
      */
     public Retrofit getClient() {

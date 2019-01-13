@@ -1,6 +1,7 @@
 package com.kpg.flatter.core.modules;
 
 import com.google.common.eventbus.EventBus;
+import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
@@ -51,8 +52,8 @@ public final class RetrofitModule {
      */
     @Provides
     @Singleton
-    public SigninCallback provideSigninCallback(EventBus eventBus){
-        return new SigninCallback(eventBus);
+    public SigninCallback provideSigninCallback(EventBus eventBus, SharedPreferencesWraper sharedPreferencesWraper){
+        return new SigninCallback(eventBus,sharedPreferencesWraper);
     }
 
     @Provides

@@ -15,7 +15,9 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.JsonObject;
 import com.kpg.flatter.R;
+import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.core.application.FlatterCore;
+import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
@@ -28,20 +30,31 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Credentials;
 import retrofit2.Call;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.login_textedit) EditText loginField;
-    @BindView(R.id.password_textedit) EditText passwordField;
-    @BindView(R.id.signup_textview) TextView signupText;
-    @BindView(R.id.signin_button) Button signinButton;
-    @BindView(R.id.textTop) TextView topText;
+    @BindView(R.id.login_textedit)
+    EditText loginField;
+    @BindView(R.id.password_textedit)
+    EditText passwordField;
+    @BindView(R.id.signup_textview)
+    TextView signupText;
+    @BindView(R.id.signin_button)
+    Button signinButton;
+    @BindView(R.id.textTop)
+    TextView topText;
 
 
-    @Inject EventBus eventBus;
-    @Inject ApiInterface apiService;
-    @Inject SigninCallback signinCallback;
+    @Inject
+    EventBus eventBus;
+    @Inject
+    ApiInterface apiService;
+    @Inject
+    SigninCallback signinCallback;
+
+    private SharedPreferencesWraper sharedPreferencesWraper;
 
     /**
      * Creates view form xml, connects to server, bind ButterKnife
@@ -53,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        ((FlatterCore)getApplication()).getLoginActivityComponent().inject(this);
+        ((FlatterCore) getApplication()).getLoginActivityComponent().inject(this);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
@@ -63,11 +76,25 @@ public class LoginActivity extends AppCompatActivity {
         subscribeToEventBus();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            String credentials = sharedPreferencesWraper.readStringFromPreferences(getString(R.string.credentials));
+            Call<JsonObject> call = apiService.signin(credentials);
+            call.enqueue(signinCallback);
+        } catch (SharedPreferenceValueNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * On click action for sign in button
      * It creates request to a server to authenticate login data
      */
-    @OnClick(R.id.signin_button) void signIn(){
+    @OnClick(R.id.signin_button)
+    void signIn() {
 
         // !!
         // !!
@@ -75,8 +102,8 @@ public class LoginActivity extends AppCompatActivity {
         // TO BO DELETED
         // !!
         // !!
-        if(loginField.getText().toString().equals("test")){
-            Intent mainViewIntent = new Intent(getApplicationContext(),MainActivity.class);
+        if (loginField.getText().toString().equals("test")) {
+            Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
             finish();
             startActivity(mainViewIntent);
             return;
@@ -89,8 +116,13 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
 
-            Call<JsonObject> call = apiService.signin(createSigninRequestBody());
+            String credentials = Credentials.basic(loginField.getText().toString(), passwordField.getText().toString());
+
+            sharedPreferencesWraper.addStringToPreferences(getString(R.string.credentials), credentials);
+
+            Call<JsonObject> call = apiService.signin(credentials);
             call.enqueue(signinCallback);
+
             loginField.getText().clear();
             passwordField.getText().clear();
         }
@@ -100,7 +132,8 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * On click action for sign up general_toptext
      */
-    @OnClick(R.id.signup_textview) void signUp(){
+    @OnClick(R.id.signup_textview)
+    void signUp() {
         Intent signupIntent = new Intent(this, SignupActivity.class);
         startActivity(signupIntent);
     }
@@ -108,26 +141,35 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Registering LoginActivity class to the EventBus
      */
-    private void subscribeToEventBus(){
+    private void subscribeToEventBus() {
         eventBus.register(new SigninEventBus());
     }
 
     /**
      * Class that handles arrived event through EventBus
      */
-    private final class SigninEventBus{
+    private final class SigninEventBus {
 
         @Subscribe
         public void getStatus(SigninEvent event) {
 
-            if(event.getStatus().equals(Status.SUCCES.str)){
+            if (event.getStatus().equals(Status.SUCCES.str)) {
 
                 //Intent configureProfileIntent = new Intent(getApplicationContext(),
                 //        ConfigureProfileActivity.class);
-                Intent mainViewIntent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
                 finish();
                 startActivity(mainViewIntent);
             } else showDialog("Login or password is incorrect");
+
+            if (event.getStatus().equals(Status.SUCCES.str)) {
+                showDialog("Signed in");
+            } else {
+                showDialog("Not signed in");
+                sharedPreferencesWraper.removeStringCredentials(getString(R.string.credentials));
+            }
+            loginField.getText().clear();
+            passwordField.getText().clear();
 
         }
 
@@ -135,6 +177,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Creates Dialog with an OK button
+     *
      * @param message message displayed on Dialog
      */
     private void showDialog(String message) {
@@ -143,24 +186,31 @@ public class LoginActivity extends AppCompatActivity {
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {}
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
                 }).show();
 
     }
 
     /**
      * Get the request HashMap
+     *
      * @return created HashMap that will be generated as json through server request
      */
-    private HashMap<String,String> createSigninRequestBody(){
+    private HashMap<String, String> createSigninRequestBody() {
 
         HashMap<String, String> body = new HashMap<>();
 
-        body.put("login",loginField.getText().toString());
-        body.put("password",passwordField.getText().toString());
+        body.put("login", loginField.getText().toString());
+        body.put("password", passwordField.getText().toString());
 
         return body;
 
+    }
+
+    @Inject
+    public void setSharedPreferencesWraper(SharedPreferencesWraper sharedPreferencesWraper) {
+        this.sharedPreferencesWraper = sharedPreferencesWraper;
     }
 
 }
