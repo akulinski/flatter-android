@@ -1,6 +1,7 @@
 package com.kpg.flatter.requests.callbacks;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.common.eventbus.EventBus;
 import com.google.gson.JsonElement;
@@ -40,10 +41,10 @@ public class SigninCallback implements Callback<JsonObject> {
     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
         JsonObject jsonResponse = response.body();
-        JsonElement status = jsonResponse.get("status");
 
-        if (status.getAsString().equals("ACCEPTED")){
-            eventBus.post(new SigninEvent(Status.SUCCES.str));
+
+        if (response.isSuccessful()){
+            eventBus.post(new SigninEvent(Status.SUCCES.str,jsonResponse.get("id_token").getAsString()));
         } else {
             eventBus.post(new SigninEvent(Status.FALIURE.str));
         }
@@ -58,6 +59,7 @@ public class SigninCallback implements Callback<JsonObject> {
     @Override
     public void onFailure(Call<JsonObject> call, Throwable t) {
 
+        Log.d("FAIL",t.getLocalizedMessage());
         eventBus.post(new SigninEvent(Status.FALIURE.str));
 
     }

@@ -1,6 +1,5 @@
 package com.kpg.flatter.requests.okhttp;
 
-import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -12,12 +11,12 @@ public final class OkHttpBuilder {
 
     }
 
-    public OkHttpClient build(String username, String password) {
+    public OkHttpClient build(String token) {
 
         okHttpClient = new OkHttpClient().newBuilder().addInterceptor(chain -> {
             Request originalRequest = chain.request();
             Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                    Credentials.basic(username, password));
+                    "Bearer " + token);
             Request newRequest = builder.build();
             return chain.proceed(newRequest);
         }).build();

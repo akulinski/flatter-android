@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +18,10 @@ import com.google.gson.JsonObject;
 import com.kpg.flatter.R;
 import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.core.application.FlatterCore;
-import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.eventbus.events.SigninEvent;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
+import com.kpg.flatter.requests.models.LoginPostModel;
 import com.kpg.flatter.utills.Status;
 
 import java.util.HashMap;
@@ -30,7 +31,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Credentials;
 import retrofit2.Call;
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,14 +47,14 @@ public class LoginActivity extends AppCompatActivity {
     TextView topText;
 
 
-    @Inject
-    EventBus eventBus;
-    @Inject
-    ApiInterface apiService;
-    @Inject
-    SigninCallback signinCallback;
+    private EventBus eventBus;
+
+    private ApiInterface apiService;
+
+    private SigninCallback signinCallback;
 
     private SharedPreferencesWraper sharedPreferencesWraper;
+
 
     /**
      * Creates view form xml, connects to server, bind ButterKnife
@@ -74,19 +74,15 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         topText.setText(R.string.app_name);
         subscribeToEventBus();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        try {
-            String credentials = sharedPreferencesWraper.readStringFromPreferences(getString(R.string.credentials));
-            Call<JsonObject> call = apiService.signin(credentials);
-            call.enqueue(signinCallback);
-        } catch (SharedPreferenceValueNotFoundException e) {
-            e.printStackTrace();
-        }
+        //String credentials = sharedPreferencesWraper.readStringFromPreferences(getString(R.string.credentials));
+        createRequestFromFields();
     }
 
     /**
@@ -96,37 +92,52 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.signin_button)
     void signIn() {
 
-        // !!
-        // !!
-        // TEST INTENT
-        // TO BO DELETED
-        // !!
-        // !!
+        if (debugLogin()) return;
+
+        validateFieldsAndCreateRequest();
+
+    }
+
+    private void validateFieldsAndCreateRequest() {
+        if (isLoginOrPasswordEmpty()) {
+            showDialog("Fill all fields");
+
+        } else {
+            createRequestFromFields();
+            clearFields();
+        }
+    }
+
+    private void clearFields() {
+        loginField.getText().clear();
+        passwordField.getText().clear();
+    }
+
+    private void createRequestFromFields() {
+        LoginPostModel loginPostModel = new LoginPostModel(passwordField.getText().toString(), loginField.getText().toString());
+
+        Call<JsonObject> call = apiService.signin(loginPostModel);
+        call.enqueue(signinCallback);
+    }
+
+    private boolean isLoginOrPasswordEmpty() {
+        return loginField.getText().toString().equals("") || passwordField.getText().toString().equals("");
+    }
+
+    // !!
+    // !!
+    // TEST INTENT
+    // TO BO DELETED
+    // !!
+    // !!
+    private boolean debugLogin() {
         if (loginField.getText().toString().equals("test")) {
             Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
             finish();
             startActivity(mainViewIntent);
-            return;
+            return true;
         }
-
-        if (loginField.getText().toString().equals("")
-                || passwordField.getText().toString().equals("")) {
-
-            showDialog("Fill all fields");
-
-        } else {
-
-            String credentials = Credentials.basic(loginField.getText().toString(), passwordField.getText().toString());
-
-            sharedPreferencesWraper.addStringToPreferences(getString(R.string.credentials), credentials);
-
-            Call<JsonObject> call = apiService.signin(credentials);
-            call.enqueue(signinCallback);
-
-            loginField.getText().clear();
-            passwordField.getText().clear();
-        }
-
+        return false;
     }
 
     /**
@@ -142,35 +153,30 @@ public class LoginActivity extends AppCompatActivity {
      * Registering LoginActivity class to the EventBus
      */
     private void subscribeToEventBus() {
-        eventBus.register(new SigninEventBus());
+        eventBus.register(new SigninEventListener());
     }
 
     /**
      * Class that handles arrived event through EventBus
      */
-    private final class SigninEventBus {
+    private final class SigninEventListener {
 
         @Subscribe
         public void getStatus(SigninEvent event) {
 
             if (event.getStatus().equals(Status.SUCCES.str)) {
-
-                //Intent configureProfileIntent = new Intent(getApplicationContext(),
-                //        ConfigureProfileActivity.class);
-                Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
-                finish();
-                startActivity(mainViewIntent);
+                saveTokenAndStartMainActivity(event);
             } else showDialog("Login or password is incorrect");
 
-            if (event.getStatus().equals(Status.SUCCES.str)) {
-                showDialog("Signed in");
-            } else {
-                showDialog("Not signed in");
-                sharedPreferencesWraper.removeStringCredentials(getString(R.string.credentials));
-            }
-            loginField.getText().clear();
-            passwordField.getText().clear();
+            clearFields();
 
+        }
+
+        private void saveTokenAndStartMainActivity(SigninEvent event) {
+            sharedPreferencesWraper.addStringToPreferences(getString(R.string.token_resource),event.getToken());
+            Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
+            finish();
+            startActivity(mainViewIntent);
         }
 
     }
@@ -184,10 +190,7 @@ public class LoginActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
+                .setPositiveButton("OK", (dialogInterface, i) -> {
                 }).show();
 
     }
@@ -211,6 +214,21 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     public void setSharedPreferencesWraper(SharedPreferencesWraper sharedPreferencesWraper) {
         this.sharedPreferencesWraper = sharedPreferencesWraper;
+    }
+
+    @Inject
+    public void setEventBus(EventBus eventBus) {
+        this.eventBus = eventBus;
+    }
+
+    @Inject
+    public void setApiService(ApiInterface apiService) {
+        this.apiService = apiService;
+    }
+
+    @Inject
+    public void setSigninCallback(SigninCallback signinCallback) {
+        this.signinCallback = signinCallback;
     }
 
 }

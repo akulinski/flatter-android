@@ -6,25 +6,46 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.kpg.flatter.R;
 import com.kpg.flatter.adapters.ViewPagerAdapter;
+import com.kpg.flatter.core.SharedPreferencesWraper;
+import com.kpg.flatter.core.application.FlatterCore;
+import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.fragments.mainview.ChatFragment;
 import com.kpg.flatter.fragments.mainview.HomeFragment;
 import com.kpg.flatter.fragments.mainview.ProfileFragment;
 import com.kpg.flatter.fragments.mainview.SearchFragment;
+import com.kpg.flatter.requests.ApiClient;
+import com.kpg.flatter.requests.ApiInterface;
+import com.kpg.flatter.requests.callbacks.GetPhotosCallback;
+import com.kpg.flatter.utills.Urls;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.mainViewPager) ViewPager mainViewPager;
-    @BindView(R.id.navbar) BottomNavigationView bottomNavigationView;
+    @BindView(R.id.mainViewPager)
+    ViewPager mainViewPager;
+    @BindView(R.id.navbar)
+    BottomNavigationView bottomNavigationView;
+
+    private ApiInterface apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        ((FlatterCore) getApplication()).getMainActivityComponent().inject(this);
+
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR |
                 View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
         setContentView(R.layout.mainview);
@@ -36,18 +57,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setupViewPager(){
+    private void setupViewPager() {
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new HomeFragment(),"Home");
-        viewPagerAdapter.addFragment(new SearchFragment(),"Search");
-        viewPagerAdapter.addFragment(new ChatFragment(),"Chat");
-        viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
+        viewPagerAdapter.addFragment(new HomeFragment(), "Home");
+        viewPagerAdapter.addFragment(new SearchFragment(), "Search");
+        viewPagerAdapter.addFragment(new ChatFragment(), "Chat");
+        viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
         mainViewPager.setAdapter(viewPagerAdapter);
 
     }
 
-    private void setUpBottomNavigationBar(){
+    private void setUpBottomNavigationBar() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
@@ -69,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setUpScrollBottomNav(){
+    private void setUpScrollBottomNav() {
         mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -88,4 +109,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Inject
+    @Named("apiWithToken")
+    public void setApiService(ApiInterface apiService) {
+        this.apiService = apiService;
+    }
 }

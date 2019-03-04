@@ -1,12 +1,17 @@
 package com.kpg.flatter.core.modules;
 
+import android.content.Context;
+
 import com.google.common.eventbus.EventBus;
+import com.kpg.flatter.R;
 import com.kpg.flatter.core.SharedPreferencesWraper;
+import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
 import com.kpg.flatter.requests.callbacks.SignupCallback;
+import com.kpg.flatter.requests.okhttp.OkHttpBuilder;
 import com.kpg.flatter.utills.Urls;
 
 import javax.inject.Named;
@@ -14,6 +19,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Module that provides retrofit obj. and
@@ -43,6 +50,22 @@ public final class RetrofitModule {
     @Singleton
     public ApiInterface provideApiInterface(@Named("baseUrl") String baseUrl){
         return new ApiClient(baseUrl).getClient().create(ApiInterface.class);
+    }
+
+
+    @Provides
+    @Singleton
+    @Named("apiWithToken")
+    public ApiInterface provideRetrofit(@Named("baseUrl") String baseUrl,SharedPreferencesWraper sharedPreferencesWraper) {
+        try {
+            return new ApiClient(Urls.SERVER.url)
+                    .getClientWithInterceptor(sharedPreferencesWraper.readStringFromPreferences("TOKEN"))
+                    .create(ApiInterface.class);
+        } catch (SharedPreferenceValueNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**

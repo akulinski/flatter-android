@@ -2,10 +2,11 @@ package com.kpg.flatter.core.application;
 
 import android.app.Application;
 
-import com.kpg.flatter.activities.SignupActivity;
 import com.kpg.flatter.core.components.DaggerLoginActivityComponent;
+import com.kpg.flatter.core.components.DaggerMainActivityComponent;
 import com.kpg.flatter.core.components.DaggerSignupActivityComponent;
 import com.kpg.flatter.core.components.LoginActivityComponent;
+import com.kpg.flatter.core.components.MainActivityComponent;
 import com.kpg.flatter.core.components.SignupActivityComponent;
 import com.kpg.flatter.core.modules.ContextModule;
 import com.kpg.flatter.core.modules.EventBusModule;
@@ -17,32 +18,45 @@ import com.kpg.flatter.core.modules.SharedPreferencesModule;
  */
 public class FlatterCore extends Application {
 
+    public static final EventBusModule EVENT_BUS_MODULE = new EventBusModule();
+    public static final RetrofitModule RETROFIT_MODULE = new RetrofitModule();
+    public static final SharedPreferencesModule SHARED_PREFERENCES_MODULE = new SharedPreferencesModule();
     /**
      * Built by dagger
      */
     private LoginActivityComponent loginActivityComponent;
     private SignupActivityComponent signupActivityComponent;
+    private MainActivityComponent mainActivityComponent;
 
-     /**
+    /**
      * Called when application starts - dagger builder call
      */
     @Override
     public void onCreate() {
         super.onCreate();
+
         loginActivityComponent = DaggerLoginActivityComponent
                 .builder()
-                .eventBusModule(new EventBusModule())
-                .retrofitModule(new RetrofitModule())
+                .eventBusModule(EVENT_BUS_MODULE)
+                .retrofitModule(RETROFIT_MODULE)
                 .contextModule(new ContextModule(getApplicationContext()))
-                .sharedPreferencesModule(new SharedPreferencesModule())
+                .sharedPreferencesModule(SHARED_PREFERENCES_MODULE)
                 .build();
+
 
         signupActivityComponent = DaggerSignupActivityComponent
                 .builder()
-                .eventBusModule(new EventBusModule())
-                .retrofitModule(new RetrofitModule())
+                .eventBusModule(EVENT_BUS_MODULE)
+                .retrofitModule(RETROFIT_MODULE)
                 .build();
 
+        mainActivityComponent = DaggerMainActivityComponent
+                .builder()
+                .eventBusModule(EVENT_BUS_MODULE)
+                .retrofitModule(RETROFIT_MODULE)
+                .contextModule(new ContextModule(getApplicationContext()))
+                .sharedPreferencesModule(SHARED_PREFERENCES_MODULE)
+                .build();
     }
 
     public LoginActivityComponent getLoginActivityComponent() {
@@ -53,11 +67,19 @@ public class FlatterCore extends Application {
         this.loginActivityComponent = loginActivityComponent;
     }
 
-    public SignupActivityComponent getSignupActivityComponent(){
+    public SignupActivityComponent getSignupActivityComponent() {
         return signupActivityComponent;
     }
 
-    public void setSignupActivityComponent(SignupActivityComponent signupActivityComponent){
+    public void setSignupActivityComponent(SignupActivityComponent signupActivityComponent) {
         this.signupActivityComponent = signupActivityComponent;
+    }
+
+    public MainActivityComponent getMainActivityComponent() {
+        return mainActivityComponent;
+    }
+
+    public void setMainActivityComponent(MainActivityComponent mainActivityComponent) {
+        this.mainActivityComponent = mainActivityComponent;
     }
 }

@@ -1,6 +1,8 @@
 package com.kpg.flatter.requests;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.kpg.flatter.requests.models.LoginPostModel;
 
 import java.util.HashMap;
 
@@ -16,11 +18,11 @@ import retrofit2.http.Path;
  */
 public interface ApiInterface {
 
-    @GET("/user/validate")
-    Call<JsonObject> signin(@Header("Authorization") String credentials);
+    @POST("/api/authenticate")
+    Call<JsonObject> signin(@Body LoginPostModel loginPostModel);
 
-    @GET("/users/getPhotos/{user}/{album}")
-    Call<JsonObject> getPhotos(@Path("user")String user,@Path("album") String album);
+    @GET("/api/photos")
+    Call<JsonArray> getPhotos();
 
     @POST("/users/addPhoto")
     Call<JsonObject> addPhoto(@Body String body);
