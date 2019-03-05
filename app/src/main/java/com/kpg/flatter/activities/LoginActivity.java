@@ -27,6 +27,7 @@ import com.kpg.flatter.utills.Status;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     private EventBus eventBus;
 
     private ApiInterface apiService;
+
+    private ApiInterface apiInterfaceWithToken;
 
     private SigninCallback signinCallback;
 
@@ -215,6 +218,13 @@ public class LoginActivity extends AppCompatActivity {
     public void setSharedPreferencesWraper(SharedPreferencesWraper sharedPreferencesWraper) {
         this.sharedPreferencesWraper = sharedPreferencesWraper;
     }
+
+    @Inject
+    @Named("apiWithToken")
+    public void setApiInterfaceWithToken(ApiInterface apiInterfaceWithToken){
+        this.apiInterfaceWithToken = apiInterfaceWithToken;
+    }
+
 
     @Inject
     public void setEventBus(EventBus eventBus) {
