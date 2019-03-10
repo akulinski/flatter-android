@@ -1,12 +1,10 @@
 package com.kpg.flatter.activities;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,9 +16,12 @@ import com.google.gson.JsonObject;
 import com.kpg.flatter.R;
 import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.core.application.FlatterCore;
+import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.eventbus.events.SigninEvent;
+import com.kpg.flatter.eventbus.events.ValidateTokenEvent;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
+import com.kpg.flatter.requests.callbacks.ValidateTokenCallback;
 import com.kpg.flatter.requests.models.LoginPostModel;
 import com.kpg.flatter.utills.Status;
 
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SigninCallback signinCallback;
 
+
     private SharedPreferencesWraper sharedPreferencesWraper;
 
 
@@ -83,9 +85,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        try {
+            String readTokenFromPreferences = sharedPreferencesWraper.readStringFromPreferences(getString(R.string.token_resource));
 
-        //String credentials = sharedPreferencesWraper.readStringFromPreferences(getString(R.string.credentials));
-        createRequestFromFields();
+            if(!readTokenFromPreferences.equals("")){
+                checkToken();
+            }
+
+        } catch (SharedPreferenceValueNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -116,6 +125,12 @@ public class LoginActivity extends AppCompatActivity {
         passwordField.getText().clear();
     }
 
+    private void checkToken(){
+        ValidateTokenCallback validateTokenCallback = new ValidateTokenCallback(eventBus);
+        Call<String> call = apiService.validateToken();
+        call.enqueue(validateTokenCallback);
+    }
+
     private void createRequestFromFields() {
         LoginPostModel loginPostModel = new LoginPostModel(passwordField.getText().toString(), loginField.getText().toString());
 
@@ -127,12 +142,11 @@ public class LoginActivity extends AppCompatActivity {
         return loginField.getText().toString().equals("") || passwordField.getText().toString().equals("");
     }
 
-    // !!
-    // !!
-    // TEST INTENT
-    // TO BO DELETED
-    // !!
-    // !!
+    /**
+     * TODO remove after testing phase
+     *
+     * @return
+     */
     private boolean debugLogin() {
         if (loginField.getText().toString().equals("test")) {
             Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
@@ -157,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void subscribeToEventBus() {
         eventBus.register(new SigninEventListener());
+        eventBus.register(new ValidateTokenEventListener());
     }
 
     /**
@@ -176,10 +191,23 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         private void saveTokenAndStartMainActivity(SigninEvent event) {
-            sharedPreferencesWraper.addStringToPreferences(getString(R.string.token_resource),event.getToken());
+            sharedPreferencesWraper.addStringToPreferences(getString(R.string.token_resource), event.getToken());
             Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
             finish();
             startActivity(mainViewIntent);
+        }
+
+    }
+
+    private final class ValidateTokenEventListener{
+
+        @Subscribe
+        public void valideToken(ValidateTokenEvent validateTokenEvent){
+            if(validateTokenEvent.getStatus().equals(Status.SUCCES.str)){
+                Intent mainViewIntent = new Intent(getApplicationContext(), MainActivity.class);
+                finish();
+                startActivity(mainViewIntent);
+            }
         }
 
     }
@@ -221,7 +249,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Inject
     @Named("apiWithToken")
-    public void setApiInterfaceWithToken(ApiInterface apiInterfaceWithToken){
+    public void setApiInterfaceWithToken(ApiInterface apiInterfaceWithToken) {
         this.apiInterfaceWithToken = apiInterfaceWithToken;
     }
 

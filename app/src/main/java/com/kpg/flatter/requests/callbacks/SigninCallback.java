@@ -1,10 +1,8 @@
 package com.kpg.flatter.requests.callbacks;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.common.eventbus.EventBus;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.eventbus.events.SigninEvent;
@@ -22,11 +20,11 @@ import retrofit2.Response;
  */
 public class SigninCallback implements Callback<JsonObject> {
 
-   private EventBus eventBus;
-   private SharedPreferencesWraper sharedPreferencesWraper;
+    private EventBus eventBus;
+    private SharedPreferencesWraper sharedPreferencesWraper;
 
-   @Inject
-    public SigninCallback(EventBus eventBus,SharedPreferencesWraper sharedPreferencesWraper){
+    @Inject
+    public SigninCallback(EventBus eventBus, SharedPreferencesWraper sharedPreferencesWraper) {
         this.eventBus = eventBus;
         this.sharedPreferencesWraper = sharedPreferencesWraper;
     }
@@ -34,7 +32,8 @@ public class SigninCallback implements Callback<JsonObject> {
     /**
      * Method that handle successful response form the server
      * EventBus sends event to the LoginActivity
-     * @param call generated call to the server
+     *
+     * @param call     generated call to the server
      * @param response request body form server
      */
     @Override
@@ -42,9 +41,8 @@ public class SigninCallback implements Callback<JsonObject> {
 
         JsonObject jsonResponse = response.body();
 
-
-        if (response.isSuccessful()){
-            eventBus.post(new SigninEvent(Status.SUCCES.str,jsonResponse.get("id_token").getAsString()));
+        if (response.isSuccessful()) {
+            eventBus.post(new SigninEvent(Status.SUCCES.str, jsonResponse.get("id_token").getAsString()));
         } else {
             eventBus.post(new SigninEvent(Status.FALIURE.str));
         }
@@ -53,13 +51,14 @@ public class SigninCallback implements Callback<JsonObject> {
     /**
      * Method that handle failed response from the server
      * Printing exception and sending Event through EventBus
+     *
      * @param call generated call to the server
-     * @param t error from the request
+     * @param t    error from the request
      */
     @Override
     public void onFailure(Call<JsonObject> call, Throwable t) {
 
-        Log.d("FAIL",t.getLocalizedMessage());
+        Log.d("FAIL", t.getLocalizedMessage());
         eventBus.post(new SigninEvent(Status.FALIURE.str));
 
     }
