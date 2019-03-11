@@ -22,4 +22,7 @@
     <string name="CREDENTIALS">CREDENTIALS</string>
     <string name="credentials">credentials</string>
     <string name="token_resource">TOKEN</string>
+    <string name="home">Home</string>
+    <string name="fakeFlat2">http://www.loopercapital.com/wp-content/uploads/2017/01/promocion-alicante.jpg</string>
+    <string name="fakeFlat3">http://www.fotontrucks.co.za/wp-content/uploads/2017/09/luxury-properties.jpg</string>
 </resources>

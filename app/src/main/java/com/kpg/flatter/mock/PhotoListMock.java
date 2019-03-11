@@ -21,13 +21,10 @@ public class PhotoListMock {
     public static LinkedList<String> createMatchesList(){
 
         LinkedList<String> matchesList = new LinkedList<>();
-        matchesList.add("http://www.courserepository.org/wp-content/uploads/2018/05/Luxury-Apartments.jpg");
         matchesList.add("https://s-ec.bstatic.com/images/hotel/max1024x768/112/112315144.jpg");
         matchesList.add("https://cdngeneral.rentcafe.com/dmslivecafe/3/624284/exterior-luxury-apartments-in-castle-rock.jpg");
         matchesList.add("https://t-ec.bstatic.com/images/hotel/max1024x768/702/70293370.jpg");
         matchesList.add("https://u.profitroom.pl/2017.luxuryapartments.com.pl/thumb/0x900/uploads/3.jpg");
-        matchesList.add("http://cdn.home-designing.com/wp-content/uploads/2016/04/luxury-art-deco-apartment-interior.jpg");
-        matchesList.add("http://www.trimarkproperties.com/gainesville/sabal-palms/luxury-apartments/og.jpg");
         return matchesList;
 
     }
