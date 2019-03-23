@@ -1,5 +1,6 @@
 package com.kpg.flatter.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -20,6 +21,8 @@ import com.kpg.flatter.fragments.mainview.SearchFragment;
 import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.GetPhotosCallback;
+import com.kpg.flatter.requests.callbacks.QuestionnaireCallback;
+import com.kpg.flatter.requests.models.QuestionnairePostModel;
 import com.kpg.flatter.utills.Urls;
 
 import javax.inject.Inject;
@@ -27,6 +30,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 
@@ -55,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigationBar();
         setUpScrollBottomNav();
 
+        Intent i = new Intent(getApplicationContext(), QuestionnaireActivity.class);
+        startActivity(i);
+
+
     }
+
 
     private void setupViewPager() {
 
@@ -108,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Inject
     @Named("apiWithToken")

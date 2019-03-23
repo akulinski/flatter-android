@@ -9,6 +9,7 @@ import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.AddPhotoCallback;
+import com.kpg.flatter.requests.callbacks.QuestionnaireCallback;
 import com.kpg.flatter.requests.callbacks.SigninCallback;
 import com.kpg.flatter.requests.callbacks.SignupCallback;
 import com.kpg.flatter.requests.okhttp.OkHttpBuilder;
@@ -98,5 +99,11 @@ public final class RetrofitModule {
 
         return new SignupCallback(eventBus);
 
+    }
+
+    @Provides
+    @Singleton
+    public QuestionnaireCallback provideQuestionnaireCallback(EventBus eventBus) {
+        return new QuestionnaireCallback(eventBus);
     }
 }

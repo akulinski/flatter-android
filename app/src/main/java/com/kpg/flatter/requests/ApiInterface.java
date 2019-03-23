@@ -3,6 +3,7 @@ package com.kpg.flatter.requests;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kpg.flatter.requests.models.LoginPostModel;
+import com.kpg.flatter.requests.models.QuestionnairePostModel;
 
 import java.util.HashMap;
 
@@ -34,5 +35,8 @@ public interface ApiInterface {
 
     @POST("api/register")
     Call<ResponseBody> signup(@Body HashMap<String, String> body);
+
+    @POST("/api/questionnaires")
+    Call<ResponseBody> questionnaireConfirm(@Body QuestionnairePostModel body);
 
 }
