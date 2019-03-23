@@ -13,12 +13,16 @@ import com.google.common.eventbus.Subscribe;
 import com.jaygoo.widget.OnRangeChangedListener;
 import com.jaygoo.widget.RangeSeekBar;
 import com.kpg.flatter.R;
+import com.kpg.flatter.core.SharedPreferencesWraper;
 import com.kpg.flatter.core.application.FlatterCore;
+import com.kpg.flatter.core.exceptions.SharedPreferenceValueNotFoundException;
 import com.kpg.flatter.eventbus.events.QuestionnaireEvent;
+import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.QuestionnaireCallback;
 import com.kpg.flatter.requests.models.QuestionnairePostModel;
 import com.kpg.flatter.utills.Status;
+import com.kpg.flatter.utills.Urls;
 
 import net.igenius.customcheckbox.CustomCheckBox;
 
@@ -74,12 +78,21 @@ public class QuestionnaireActivity extends AppCompatActivity {
     private ApiInterface apiService;
     private QuestionnaireCallback questionnaireCallback;
     private EventBus eventBus;
+    private SharedPreferencesWraper sharedPreferencesWraper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.questionnarieview);
         ((FlatterCore) getApplication()).getQuestionnaireActivityComponent().inject(this);
+
+        try {
+            apiService = new ApiClient(Urls.SERVER.url)
+                    .getClientWithInterceptor(sharedPreferencesWraper.readStringFromPreferences("TOKEN"))
+                    .create(ApiInterface.class);
+        } catch (SharedPreferenceValueNotFoundException e) {
+            e.printStackTrace();
+        }
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR |
                 View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
@@ -230,10 +243,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
     }
 
 
-
-    @Inject
-    public void setApiService(ApiInterface apiService) {this.apiService = apiService;}
-
     @Inject
     public void setQuestionnaireCallback(QuestionnaireCallback questionnaireCallback) {
         this.questionnaireCallback = questionnaireCallback;
@@ -274,6 +283,12 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                 }).show();
 
+    }
+
+
+    @Inject
+    public void setSharedPreferencesWraper(SharedPreferencesWraper sharedPreferencesWraper) {
+        this.sharedPreferencesWraper = sharedPreferencesWraper;
     }
 
 }

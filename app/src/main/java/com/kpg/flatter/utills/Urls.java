@@ -2,7 +2,7 @@ package com.kpg.flatter.utills;
 
 public enum Urls {
 
-    SERVER("http://192.168.0.73:8080/");
+    SERVER("http://192.168.0.47:8080/");
 
     public String url;
 

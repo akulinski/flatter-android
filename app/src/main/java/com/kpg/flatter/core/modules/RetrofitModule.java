@@ -1,6 +1,7 @@
 package com.kpg.flatter.core.modules;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.common.eventbus.EventBus;
 import com.kpg.flatter.R;
@@ -59,6 +60,7 @@ public final class RetrofitModule {
     @Named("apiWithToken")
     public ApiInterface provideRetrofit(@Named("baseUrl") String baseUrl,SharedPreferencesWraper sharedPreferencesWraper) {
         try {
+            Log.e("Token",sharedPreferencesWraper.readStringFromPreferences("TOKEN"));
             return new ApiClient(Urls.SERVER.url)
                     .getClientWithInterceptor(sharedPreferencesWraper.readStringFromPreferences("TOKEN"))
                     .create(ApiInterface.class);
