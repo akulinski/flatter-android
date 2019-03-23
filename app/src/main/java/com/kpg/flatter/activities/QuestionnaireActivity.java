@@ -27,7 +27,6 @@ import com.kpg.flatter.utills.Urls;
 import net.igenius.customcheckbox.CustomCheckBox;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -214,8 +213,8 @@ public class QuestionnaireActivity extends AppCompatActivity {
         model.setSizeMin((int) sizeLeftValue);
         model.setSizeMax((int) sizeRightValue);
 
-        model.setMinCost((int) totalCostLeftValue);
-        model.setMaxCost((int) totalCostRightValue);
+        model.setTotalCostMin((int) totalCostLeftValue);
+        model.setTotalCostMax((int) totalCostRightValue);
 
         model.setConstructionYearMin((int) constructionLeftValue);
         model.setConstructionYearMax((int) constructionRightValue);
@@ -261,7 +260,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
         @Subscribe
         public void getStatus(QuestionnaireEvent event) {
             if (event.getStatus().equals(Status.SUCCES.str)) {
-                showDialog("All data saved");
                 finish();
             } else if (event.getStatus().equals("Unauthorized")) {
                 showDialog("Unauthorized");

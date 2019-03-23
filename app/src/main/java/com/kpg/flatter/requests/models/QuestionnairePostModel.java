@@ -13,8 +13,8 @@ public class QuestionnairePostModel {
     private Boolean isFurnished;
     private Boolean smokingInside;
     private String type;
-    private int minCost;
-    private int maxCost;
+    private int totalCostMin;
+    private int totalCostMax;
     private User user;
 
     public QuestionnairePostModel() {}
@@ -30,8 +30,8 @@ public class QuestionnairePostModel {
         this.isFurnished = isFurnished;
         this.smokingInside = smokingInside;
         this.type = type;
-        this.minCost = minCost;
-        this.maxCost = maxCost;
+        this.totalCostMin = minCost;
+        this.totalCostMax = maxCost;
         this.user = user;
     }
 
@@ -115,20 +115,20 @@ public class QuestionnairePostModel {
         this.type = type;
     }
 
-    public int getMinCost() {
-        return minCost;
+    public int getTotalCostMin() {
+        return totalCostMin;
     }
 
-    public void setMinCost(int minCost) {
-        this.minCost = minCost;
+    public void setTotalCostMin(int totalCostMin) {
+        this.totalCostMin = totalCostMin;
     }
 
-    public int getMaxCost() {
-        return maxCost;
+    public int getTotalCostMax() {
+        return totalCostMax;
     }
 
-    public void setMaxCost(int maxCost) {
-        this.maxCost = maxCost;
+    public void setTotalCostMax(int totalCostMax) {
+        this.totalCostMax = totalCostMax;
     }
 
     public User getUser() {
