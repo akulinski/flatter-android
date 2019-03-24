@@ -18,7 +18,7 @@ import retrofit2.Response;
 public class QuestionnaireCallback implements Callback<ResponseBody> {
 
     private EventBus eventBus;
-    private static final String UNAUTHORIZED = "Unauthorized";
+    private static final String UNAUTHORIZED = "UNAUTHORIZED";
     /**
      * @param eventBus injected event bus by dagger
      */

@@ -37,6 +37,6 @@ public interface ApiInterface {
     Call<ResponseBody> signup(@Body HashMap<String, String> body);
 
     @POST("/api/questionnaires")
-    Call<ResponseBody> questionnaireConfirm(@Body QuestionnairePostModel body);
+    Call<ResponseBody> createQuestionnaire(@Body QuestionnairePostModel body);
 
 }

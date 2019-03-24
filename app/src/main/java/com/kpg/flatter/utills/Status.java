@@ -9,7 +9,9 @@ public enum Status {
     SUCCES("SUCCESS"),
     FALIURE("FAILURE"),
     LOGINEXISTS("LOGINEXISTS"),
-    EMAILEXISTS("EMAILEXISTS");
+    EMAILEXISTS("EMAILEXISTS"),
+    ERROR("ERROR"),
+    UNAUTHORIZED("UNAUTHORIZED");
 
 
     public String str;

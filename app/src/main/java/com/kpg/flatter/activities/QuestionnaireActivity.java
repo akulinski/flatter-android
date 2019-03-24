@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import com.jaygoo.widget.OnRangeChangedListener;
 import com.jaygoo.widget.RangeSeekBar;
 import com.kpg.flatter.R;
 import com.kpg.flatter.core.SharedPreferencesWraper;
@@ -21,6 +20,8 @@ import com.kpg.flatter.requests.ApiClient;
 import com.kpg.flatter.requests.ApiInterface;
 import com.kpg.flatter.requests.callbacks.QuestionnaireCallback;
 import com.kpg.flatter.requests.models.QuestionnairePostModel;
+import com.kpg.flatter.adapters.RangeSeekBarAdapter;
+import com.kpg.flatter.utills.QuestionnaireActivityData;
 import com.kpg.flatter.utills.Status;
 import com.kpg.flatter.utills.Urls;
 
@@ -34,6 +35,8 @@ import butterknife.OnClick;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
+import static com.kpg.flatter.utills.QuestionnaireActivityData.*;
+
 
 public class QuestionnaireActivity extends AppCompatActivity {
 
@@ -42,19 +45,15 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
     @BindView(R.id.roomAmountRangeSeekBar)
     RangeSeekBar roomAmountRangeSeekBar;
-    private static float roomAmountLeftValue = 3, roomAmountRightValue = 8;
 
     @BindView(R.id.sizeRangeSeekBar)
     RangeSeekBar sizeRangeSeekBar;
-    private static float sizeLeftValue = 100, sizeRightValue = 900;
 
     @BindView(R.id.totalCostRangeSeekBar)
     RangeSeekBar totalCostRangeSeekBar;
-    private static float totalCostLeftValue = 4000, totalCostRightValue = 900000;
 
     @BindView(R.id.constructionRangeSeekBar)
     RangeSeekBar constructionRangeSeekBar;
-    private static float constructionLeftValue = 1900, constructionRightValue = 2000;
 
     @BindView(R.id.flatCustomCheckBox)
     CustomCheckBox flatCustomCheckBox;
@@ -78,6 +77,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
     private QuestionnaireCallback questionnaireCallback;
     private EventBus eventBus;
     private SharedPreferencesWraper sharedPreferencesWraper;
+
+    private RangeSeekBarAdapter roomAmountRangeSeekBarAdapter;
+    private RangeSeekBarAdapter sizeRangeSeekBarAdapter;
+    private RangeSeekBarAdapter totalCostRangeSeekBarAdapter;
+    private RangeSeekBarAdapter constructionYearRangeSeekBarAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,81 +107,22 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
 
     private void setUpValue() {
-        textTop.setText("Questionnaire");
+        textTop.setText(QuestionnaireActivityData.TITLE);
 
-        setUpRangeSeekBar(roomAmountRangeSeekBar, 1, 10, 2, 8);
-        setUpRangeSeekBar(sizeRangeSeekBar, 1, 1000, 100, 900);
-        setUpRangeSeekBar(constructionRangeSeekBar, 1800, 2019, 1900, 2000);
-        setUpRangeSeekBar(totalCostRangeSeekBar, 100, 1000000, 4000, 900000);
+        setUpRangeSeekBar(roomAmountRangeSeekBar, ROOM_AMOUNT_MIN_VALUE, ROOM_AMOUNT_MAX_VALUE, ROOM_AMOUNT_LEFT_BAR_DEFAULT_VALUE, ROOM_AMOUNT_RIGHT_BAR_DEFAULT_VALUE);
+        setUpRangeSeekBar(sizeRangeSeekBar, SIZE_MIN_VALUE, SIZE_MAX_VALUE, SIZE_LEFT_BAR_DEFAULT_VALUE, SIZE_RIGHT_BAR_DEFAULT_VALUE);
+        setUpRangeSeekBar(constructionRangeSeekBar, CONSTRUCTION_YEAR_MIN_VALUE, CONSTRUCTION_YEAR_MAX_VALUE, CONSTRUCTION_YEAR_LEFT_BAR_DEFAULT_VALUE, CONSTRUCTION_YEAR_RIGHT_BAR_DEFAULT_VALUE);
+        setUpRangeSeekBar(totalCostRangeSeekBar, TOTAL_COST_MIN_VALUE, TOTAL_COST_MAX_VALUE, TOTAL_COST_LEFT_BAR_DEFAULT_VALUE, TOTAL_COST_RIGHT_BAR_DEFAULT_VALUE);
 
-        roomAmountRangeSeekBar.setOnRangeChangedListener(new OnRangeChangedListener() {
-            @Override
-            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                roomAmountLeftValue = leftValue;
-                roomAmountRightValue = rightValue;
-            }
+        roomAmountRangeSeekBarAdapter = new RangeSeekBarAdapter(ROOM_AMOUNT_LEFT_BAR_DEFAULT_VALUE, ROOM_AMOUNT_RIGHT_BAR_DEFAULT_VALUE);
+        constructionYearRangeSeekBarAdapter = new RangeSeekBarAdapter(CONSTRUCTION_YEAR_LEFT_BAR_DEFAULT_VALUE, CONSTRUCTION_YEAR_RIGHT_BAR_DEFAULT_VALUE);
+        sizeRangeSeekBarAdapter = new RangeSeekBarAdapter(SIZE_LEFT_BAR_DEFAULT_VALUE, SIZE_RIGHT_BAR_DEFAULT_VALUE);
+        totalCostRangeSeekBarAdapter = new RangeSeekBarAdapter(TOTAL_COST_LEFT_BAR_DEFAULT_VALUE, TOTAL_COST_RIGHT_BAR_DEFAULT_VALUE);
 
-            @Override
-            public void onStartTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-        });
-        sizeRangeSeekBar.setOnRangeChangedListener(new OnRangeChangedListener() {
-            @Override
-            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                sizeLeftValue = leftValue;
-                sizeRightValue = rightValue;
-            }
-
-            @Override
-            public void onStartTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-        });
-        constructionRangeSeekBar.setOnRangeChangedListener(new OnRangeChangedListener() {
-            @Override
-            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                constructionLeftValue = leftValue;
-                constructionRightValue = rightValue;
-            }
-
-            @Override
-            public void onStartTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-        });
-        totalCostRangeSeekBar.setOnRangeChangedListener(new OnRangeChangedListener() {
-            @Override
-            public void onRangeChanged(RangeSeekBar view, float leftValue, float rightValue, boolean isFromUser) {
-                totalCostLeftValue = leftValue;
-                totalCostRightValue = rightValue;
-            }
-
-            @Override
-            public void onStartTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(RangeSeekBar view, boolean isLeft) {
-
-            }
-        });
+        roomAmountRangeSeekBar.setOnRangeChangedListener(roomAmountRangeSeekBarAdapter);
+        constructionRangeSeekBar.setOnRangeChangedListener(constructionYearRangeSeekBarAdapter);
+        sizeRangeSeekBar.setOnRangeChangedListener(sizeRangeSeekBarAdapter);
+        totalCostRangeSeekBar.setOnRangeChangedListener(totalCostRangeSeekBarAdapter);
 
     }
 
@@ -192,11 +137,10 @@ public class QuestionnaireActivity extends AppCompatActivity {
     void confirmData() {
 
         if (validateFlatHouseCheckBox()) {
-            Call<ResponseBody> call = apiService.questionnaireConfirm(createRequestBody());
+            Call<ResponseBody> call = apiService.createQuestionnaire(createRequestBody());
             call.enqueue(questionnaireCallback);
         }
     }
-
 
 
     private QuestionnairePostModel createRequestBody() {
@@ -207,30 +151,29 @@ public class QuestionnaireActivity extends AppCompatActivity {
         model.setFurnished(furnishedCustomCheckBox.isChecked());
         model.setSmokingInside(smokingCustomCheckBox.isChecked());
 
-        model.setRoomAmountMin((int)roomAmountLeftValue);
-        model.setRoomAmountMax((int)roomAmountRightValue);
+        model.setRoomAmountMin((int) roomAmountRangeSeekBarAdapter.getlValue());
+        model.setRoomAmountMax((int) roomAmountRangeSeekBarAdapter.getrValue());
 
-        model.setSizeMin((int) sizeLeftValue);
-        model.setSizeMax((int) sizeRightValue);
+        model.setSizeMin((int) sizeRangeSeekBarAdapter.getlValue());
+        model.setSizeMax((int) sizeRangeSeekBarAdapter.getrValue());
 
-        model.setTotalCostMin((int) totalCostLeftValue);
-        model.setTotalCostMax((int) totalCostRightValue);
+        model.setTotalCostMin((int) totalCostRangeSeekBarAdapter.getlValue());
+        model.setTotalCostMax((int) totalCostRangeSeekBarAdapter.getrValue());
 
-        model.setConstructionYearMin((int) constructionLeftValue);
-        model.setConstructionYearMax((int) constructionRightValue);
+        model.setConstructionYearMin((int) constructionYearRangeSeekBarAdapter.getlValue());
+        model.setConstructionYearMax((int) constructionYearRangeSeekBarAdapter.getrValue());
 
-        model.setUser(null);
 
         return model;
     }
 
     private String getCorrectDataFromHouseFlatCheckBox() {
         if (houseCustomCheckBox.isChecked() && flatCustomCheckBox.isChecked()) {
-            return "flat/house";
+            return FLAT_HOUSE;
         } else if (houseCustomCheckBox.isChecked() && !flatCustomCheckBox.isChecked()) {
-            return "house";
+            return HOUSE;
         } else if (!houseCustomCheckBox.isChecked() && flatCustomCheckBox.isChecked()) {
-            return "flat";
+            return FLAT;
         } else return "";
     }
 
@@ -261,10 +204,10 @@ public class QuestionnaireActivity extends AppCompatActivity {
         public void getStatus(QuestionnaireEvent event) {
             if (event.getStatus().equals(Status.SUCCES.str)) {
                 finish();
-            } else if (event.getStatus().equals("Unauthorized")) {
-                showDialog("Unauthorized");
+            } else if (event.getStatus().equals(Status.UNAUTHORIZED.str)) {
+                showDialog(Status.UNAUTHORIZED.str);
             } else {
-                showDialog("Error");
+                showDialog(Status.ERROR.str);
             }
         }
     }

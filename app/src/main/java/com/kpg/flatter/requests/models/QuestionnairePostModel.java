@@ -1,6 +1,5 @@
 package com.kpg.flatter.requests.models;
 
-import com.kpg.flatter.utills.User;
 
 public class QuestionnairePostModel {
     private Boolean pets;
@@ -15,11 +14,10 @@ public class QuestionnairePostModel {
     private String type;
     private int totalCostMin;
     private int totalCostMax;
-    private User user;
 
     public QuestionnairePostModel() {}
 
-    public QuestionnairePostModel(Boolean pets, int minCost, int maxCost, int constructionYearMin, int constructionYearMax, int roomAmountMin, int roomAmountMax, double sizeMin, double sizeMax, Boolean isFurnished, Boolean smokingInside, String type, User user) {
+    public QuestionnairePostModel(Boolean pets, int minCost, int maxCost, int constructionYearMin, int constructionYearMax, int roomAmountMin, int roomAmountMax, double sizeMin, double sizeMax, Boolean isFurnished, Boolean smokingInside, String type) {
         this.pets = pets;
         this.constructionYearMin = constructionYearMin;
         this.constructionYearMax = constructionYearMax;
@@ -32,7 +30,6 @@ public class QuestionnairePostModel {
         this.type = type;
         this.totalCostMin = minCost;
         this.totalCostMax = maxCost;
-        this.user = user;
     }
 
     public Boolean getPets() {
@@ -131,11 +128,4 @@ public class QuestionnairePostModel {
         this.totalCostMax = totalCostMax;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
