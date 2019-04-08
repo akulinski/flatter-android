@@ -43,6 +43,10 @@
             android:theme="@style/AllWhite">
         </activity>
 
+        <activity android:name=".activities.AddOfferActivity"
+            android:theme="@style/AllWhite">
+        </activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

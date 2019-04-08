@@ -68,4 +68,6 @@ dependencies {
 
     compile 'com.squareup.okhttp3:okhttp:3.12.0'
     compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.13.1'
+    compile 'com.github.HITGIF:TextFieldBoxes:1.4.4'
+
 }

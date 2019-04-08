@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigationBar();
         setUpScrollBottomNav();
 
-        Intent i = new Intent(getApplicationContext(), QuestionnaireActivity.class);
+        Intent i = new Intent(getApplicationContext(), AddOfferActivity.class);
         startActivity(i);
 
     }

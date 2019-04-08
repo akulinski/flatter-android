@@ -39,4 +39,7 @@ public interface ApiInterface {
     @POST("/api/questionnaires")
     Call<ResponseBody> createQuestionnaire(@Body QuestionnairePostModel body);
 
+   // @POST("/api/offer")
+    //Call<ResponseBody> addOffer(@Body OfferPostModel body);
+
 }

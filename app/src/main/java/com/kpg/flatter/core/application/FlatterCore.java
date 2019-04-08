@@ -2,6 +2,8 @@ package com.kpg.flatter.core.application;
 
 import android.app.Application;
 
+import com.kpg.flatter.core.components.AddOfferActivityComponent;
+import com.kpg.flatter.core.components.DaggerAddOfferActivityComponent;
 import com.kpg.flatter.core.components.DaggerLoginActivityComponent;
 import com.kpg.flatter.core.components.DaggerMainActivityComponent;
 import com.kpg.flatter.core.components.DaggerQuestionnaireActivityComponent;
@@ -30,6 +32,7 @@ public class FlatterCore extends Application {
     private SignupActivityComponent signupActivityComponent;
     private MainActivityComponent mainActivityComponent;
     private QuestionnaireActivityComponent questionnaireActivityComponent;
+    private AddOfferActivityComponent addOfferActivityComponent;
 
     /**
      * Called when application starts - dagger builder call
@@ -68,6 +71,15 @@ public class FlatterCore extends Application {
                 .contextModule(new ContextModule(getApplicationContext()))
                 .sharedPreferencesModule(SHARED_PREFERENCES_MODULE)
                 .build();
+
+        addOfferActivityComponent = DaggerAddOfferActivityComponent
+                .builder()
+                .eventBusModule(EVENT_BUS_MODULE)
+                .retrofitModule(RETROFIT_MODULE)
+                .contextModule(new ContextModule(getApplicationContext()))
+                .sharedPreferencesModule(SHARED_PREFERENCES_MODULE)
+                .build();
+
     }
 
     public LoginActivityComponent getLoginActivityComponent() {
@@ -100,5 +112,13 @@ public class FlatterCore extends Application {
 
     public void setQuestionnaireActivityComponent(QuestionnaireActivityComponent questionnaireActivityComponent) {
         this.questionnaireActivityComponent = questionnaireActivityComponent;
+    }
+
+    public AddOfferActivityComponent getAddOfferActivityComponent() {
+        return addOfferActivityComponent;
+    }
+
+    public void setAddOfferActivityComponent(AddOfferActivityComponent addOfferActivityComponent) {
+        this.addOfferActivityComponent = addOfferActivityComponent;
     }
 }
