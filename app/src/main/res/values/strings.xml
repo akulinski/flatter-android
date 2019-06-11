@@ -2,4 +2,27 @@
     <string name="app_name">Flatter</string>
     <string name="name">Flatter</string>
     <string name="signup_loginscreen">Don\'t have an account? Sign up</string>
+    <string name="signup">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="person_name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_again">Password again</string>
+    <string name="emailsent">Verification email sent.</string>
+    <string name="confirmemail">Check your inbox to confirm.</string>
+    <string name="ok">OK</string>
+    <string name="FillFields">Fill all fields</string>
+    <string name="LoginPasswordIncorect">Login or password not corrected</string>
+    <string name="choosePhoto">Choose your profile photo</string>
+    <string name="choosetype">Choose what you are looking for</string>
+    <string name="configured">You are all set up!</string>
+    <string name="fakeFlat">https://i.pinimg.com/originals/e9/32/ce/e932ce2b1461c5c4a67ea1e82736f174.jpg</string>
+    <string name="preference_file_key">iPV4z2jZcjDeP5PEmSri</string>
+    <string name="CREDENTIALS">CREDENTIALS</string>
+    <string name="credentials">credentials</string>
+    <string name="token_resource">TOKEN</string>
+    <string name="home">Home</string>
+    <string name="fakeFlat2">http://www.loopercapital.com/wp-content/uploads/2017/01/promocion-alicante.jpg</string>
+    <string name="fakeFlat3">http://www.fotontrucks.co.za/wp-content/uploads/2017/09/luxury-properties.jpg</string>
 </resources>

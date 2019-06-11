@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="7dp">
+        <include layout="@layout/general_toptext"/>
+    </LinearLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:divider="@drawable/horizontal_divider"
+            android:layout_marginTop="12dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Flat"
+                    android:textColor="@color/black" />
+
+                <net.igenius.customcheckbox.CustomCheckBox
+                    android:id="@+id/flatCustomCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    app:color_checked="@color/colorPrimary"
+                    app:small_tick="true"
+                    />
+
+                <net.igenius.customcheckbox.CustomCheckBox
+                    android:id="@+id/houseCustomCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:color_checked="@color/colorPrimary"
+                    app:small_tick="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="House"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <net.igenius.customcheckbox.CustomCheckBox
+                    android:id="@+id/petsCustomCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:color_checked="@color/colorPrimary"
+                    app:small_tick="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pets?"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <net.igenius.customcheckbox.CustomCheckBox
+                    android:id="@+id/furnishedCustomCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:color_checked="@color/colorPrimary"
+                    app:small_tick="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Furnished?"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <net.igenius.customcheckbox.CustomCheckBox
+                    android:id="@+id/smokingCustomCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:color_checked="@color/colorPrimary"
+                    app:small_tick="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smoking inside?"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Room amount"
+                    android:textColor="@color/black" />
+
+                <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/roomAmountRangeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:rsb_indicator_height="30dp"
+                    app:rsb_indicator_radius="20dp"
+                    app:rsb_indicator_show_mode="alwaysShow"
+                    app:rsb_indicator_width="30dp"
+                    app:rsb_max="100"
+                    app:rsb_min="0"
+                    app:rsb_mode="range"
+                    app:rsb_progress_color="@color/colorPrimary"
+                    app:rsb_thumb_scale_ratio="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Size"
+                    android:textColor="@color/black" />
+
+                <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/sizeRangeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:rsb_indicator_height="30dp"
+                    app:rsb_indicator_radius="20dp"
+                    app:rsb_indicator_show_mode="alwaysShow"
+                    app:rsb_indicator_width="30dp"
+                    app:rsb_max="100"
+                    app:rsb_min="0"
+                    app:rsb_mode="range"
+                    app:rsb_progress_color="@color/colorPrimary"
+                    app:rsb_thumb_scale_ratio="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total cost"
+                    android:textColor="@color/black" />
+
+                <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/totalCostRangeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:rsb_indicator_height="30dp"
+                    app:rsb_indicator_radius="20dp"
+                    app:rsb_indicator_show_mode="alwaysShow"
+                    app:rsb_indicator_width="30dp"
+                    app:rsb_max="100"
+                    app:rsb_min="0"
+                    app:rsb_mode="range"
+                    app:rsb_progress_color="@color/colorPrimary"
+                    app:rsb_thumb_scale_ratio="1.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Construction Year"
+                    android:textColor="@color/black" />
+
+                <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/constructionRangeSeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:rsb_indicator_height="30dp"
+                    app:rsb_indicator_radius="20dp"
+                    app:rsb_indicator_show_mode="alwaysShow"
+                    app:rsb_indicator_width="30dp"
+                    app:rsb_max="100"
+                    app:rsb_min="0"
+                    app:rsb_mode="range"
+                    app:rsb_progress_color="@color/colorPrimary"
+                    app:rsb_thumb_scale_ratio="1.2" />
+                <Button
+                    android:id="@+id/confirmButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm"
+                    android:background="@drawable/button_shape"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="15dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
